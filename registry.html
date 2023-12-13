@@ -17,6 +17,23 @@
 <button onclick="findPaths()">Find Paths</button>
 <br><br>
 <div id="output"></div>
+  <!-- User interface for interaction -->
+<label for="searchFunction">Search Function:</label>
+<input type="text" id="searchFunction">
+<button onclick="searchFunction()">Search</button>
+<br><br>
+<div id="functionInfo"></div>
+
+<br><br>
+<label for="testFunction">Test Function:</label>
+<input type="text" id="testFunction">
+<label for="testInput">Input:</label>
+<input type="text" id="testInput">
+<label for="expectedOutput">Expected Output:</label>
+<input type="text" id="expectedOutput">
+<button onclick="testFunctionIO()">Test</button>
+<div id="testResult"></div>
+
 
 <script src="https://cdn.jsdelivr.net/npm/acorn/dist/acorn.js"></script>
 <script>
@@ -101,7 +118,6 @@ class Codebase {
   searchFunctionByName(name) {
     return this.functions.find(func => func.functionName === name);
   }
-
   getAllFunctions() {
     return this.functions;
   }
@@ -141,6 +157,40 @@ function findPaths() {
 
   // Find paths between user provided types
   myCodebase.findPaths(startType, endType);
+}
+
+function searchFunction() {
+  const functionName = document.getElementById('searchFunction').value;
+  const foundFunction = myCodebase.searchFunctionByName(functionName);
+
+  if (foundFunction) {
+    document.getElementById('functionInfo').innerHTML = `
+      <h3>Function Found:</h3>
+      <pre>${JSON.stringify(foundFunction, null, 2)}</pre>
+    `;
+  } else {
+    document.getElementById('functionInfo').innerHTML = `
+      <p>Function not found!</p>
+    `;
+  }
+}
+
+function testFunctionIO() {
+  const functionName = document.getElementById('testFunction').value;
+  const testInput = JSON.parse(document.getElementById('testInput').value);
+  const expectedOutput = JSON.parse(document.getElementById('expectedOutput').value);
+
+  const testResult = myCodebase.testFunctionIO(functionName, testInput, expectedOutput);
+  
+  if (testResult === true) {
+    document.getElementById('testResult').innerHTML = `
+      <p>Test Passed!</p>
+    `;
+  } else {
+    document.getElementById('testResult').innerHTML = `
+      <p>Test Failed!</p>
+    `;
+  }
 }
 </script>
 
