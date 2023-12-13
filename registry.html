@@ -17,6 +17,12 @@
 <button onclick="findPaths()">Find Paths</button>
 <br><br>
 <div id="output"></div>
+  <!-- User interface for interaction -->
+<label for="searchFunction">Search Function:</label>
+<input type="text" id="searchFunction">
+<button onclick="searchFunction()">Search</button>
+<br><br>
+<div id="functionInfo"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/acorn/dist/acorn.js"></script>
 <script>
@@ -101,7 +107,6 @@ class Codebase {
   searchFunctionByName(name) {
     return this.functions.find(func => func.functionName === name);
   }
-
   getAllFunctions() {
     return this.functions;
   }
@@ -141,6 +146,22 @@ function findPaths() {
 
   // Find paths between user provided types
   myCodebase.findPaths(startType, endType);
+}
+
+function searchFunction() {
+  const functionName = document.getElementById('searchFunction').value;
+  const foundFunction = myCodebase.searchFunctionByName(functionName);
+
+  if (foundFunction) {
+    document.getElementById('functionInfo').innerHTML = `
+      <h3>Function Found:</h3>
+      <pre>${JSON.stringify(foundFunction, null, 2)}</pre>
+    `;
+  } else {
+    document.getElementById('functionInfo').innerHTML = `
+      <p>Function not found!</p>
+    `;
+  }
 }
 </script>
 
