@@ -7,7 +7,7 @@ function MapFunctionIOs(minNum, maxNum) {
     { func: function divide(a, b) { return a / b; }, name: 'divide' },
     { func: function modulo(a, b) { return a % b; }, name: 'modulo' },
     { func: function exponentiate(base, exponent) { return base ** exponent; }, name: 'exponentiate' },
-
+    
     // Comparison Functions
     { func: function isEqualTo(a, b) { return a == b; }, name: 'isEqualTo' },
     { func: function isNotEqualTo(a, b) { return a != b; }, name: 'isNotEqualTo' },
@@ -17,11 +17,11 @@ function MapFunctionIOs(minNum, maxNum) {
     { func: function isLessThan(a, b) { return a < b; }, name: 'isLessThan' },
     { func: function isGreaterOrEqual(a, b) { return a >= b; }, name: 'isGreaterOrEqual' },
     { func: function isLessOrEqual(a, b) { return a <= b; }, name: 'isLessOrEqual' },
-
+    
     // Logical Functions
     { func: function logicalAND(a, b) { return a && b; }, name: 'logicalAND' },
     { func: function logicalOR(a, b) { return a || b; }, name: 'logicalOR' },
-
+    
     // Bitwise Functions
     { func: function bitwiseAND(a, b) { return a & b; }, name: 'bitwiseAND' },
     { func: function bitwiseOR(a, b) { return a | b; }, name: 'bitwiseOR' },
@@ -31,7 +31,7 @@ function MapFunctionIOs(minNum, maxNum) {
     { func: function unsignedRightShift(a, b) { return a >>> b; }, name: 'unsignedRightShift' }
   ];
 
-  const results = new Map();
+  const results = {};
 
   for (const { func, name } of JavaScriptOperatorsAsFunctions) {
     for (let a = minNum; a <= maxNum; a++) {
@@ -40,10 +40,21 @@ function MapFunctionIOs(minNum, maxNum) {
         let result;
         try {
           result = func(a, b);
-          if (!results.has(result)) {
-            results.set(result, []);
+          const dataType = typeof result;
+
+          if (!results.hasOwnProperty(dataType)) {
+            results[dataType] = {};
           }
-          results.get(result).push({ operatorName: name, inputs });
+
+          if (!results[dataType].hasOwnProperty(result)) {
+            results[dataType][result] = {};
+          }
+
+          if (!results[dataType][result].hasOwnProperty(name)) {
+            results[dataType][result][name] = [];
+          }
+
+          results[dataType][result][name].push(inputs);
         } catch (error) {
           console.error(`Error with inputs (${a}, ${b}) in operator ${name}: ${error.message}`);
         }
@@ -53,3 +64,9 @@ function MapFunctionIOs(minNum, maxNum) {
 
   return results;
 }
+
+// Example usage:
+const minNumber = 1;
+const maxNumber = 5;
+const resultMap = MapFunctionIOs(minNumber, maxNumber);
+console.log(resultMap);
