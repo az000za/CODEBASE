@@ -3,14 +3,15 @@ function findOperators(input, output) {
     { symbol: '+', operation: (a, b) => a + b },
     { symbol: '-', operation: (a, b) => a - b },
     { symbol: '*', operation: (a, b) => a * b },
-    { symbol: '/', operation: (a, b) => a / b },
-    { symbol: '%', operation: (a, b) => a % b },
+    { symbol: '/', operation: (a, b) => b !== 0 ? a / b : null },
+    { symbol: '%', operation: (a, b) => Number.isInteger(a) && Number.isInteger(b) ? a % b : null },
     { symbol: '**', operation: (a, b) => a ** b },
     { symbol: '===', operation: (a, b) => a === b },
     // Add more operators as needed
   ];
 
   const queue = [{ result: input, operations: [], steps: [input] }];
+  const visited = new Set();
 
   while (queue.length > 0) {
     const current = queue.shift();
@@ -19,20 +20,27 @@ function findOperators(input, output) {
     if (result[0] === output) {
       const operationSteps = operations.map((op, index) => ({
         operation: op,
-        inputs: steps[index]
+        inputs: Array.isArray(steps[index]) ? steps[index] : [steps[index]]
       }));
-
       return operationSteps;
     }
+
+    if (visited.has(result.toString())) {
+      continue; // Skip if this result has been visited before to avoid cycles
+    }
+    visited.add(result.toString());
 
     for (let i = 0; i < availableOperators.length; i++) {
       const { symbol, operation } = availableOperators[i];
       const newResult = operation(result[0], result[1]);
-      const updatedOperations = [...operations, symbol];
-      const updatedSteps = [...steps, newResult];
-      const updatedInput = [newResult, result[1]];
 
-      queue.push({ result: updatedInput, operations: updatedOperations, steps: updatedSteps });
+      if (newResult !== null && !visited.has(newResult.toString())) {
+        const updatedOperations = [...operations, symbol];
+        const updatedSteps = [...steps, [result[0], result[1]]]; // Store operands as an array
+        const updatedInput = [newResult, result[1]];
+
+        queue.push({ result: updatedInput, operations: updatedOperations, steps: updatedSteps });
+      }
     }
   }
 
