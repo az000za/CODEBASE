@@ -34,12 +34,17 @@
 <button onclick="testFunctionIO()">Test</button>
 <div id="testResult"></div>
 
-
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/acorn/dist/acorn.js"></script>
 <script type="text/javascript" src="https://az000za.github.io/CODEBASE/extractFunctionInfo.js"></script>
 <script type="text/javascript" src="https://az000za.github.io/CODEBASE/TypePathFinder.js"></script>
 <script type="text/javascript" src="https://az000za.github.io/CODEBASE/AlgoPathFinder.js"></script>
-<script>
+<script type="text/javascript" src="https://az000za.github.io/CODEBASE/minifyCode.js"></script>
+<script type="text/javascript" src="https://az000za.github.io/CODEBASE/improveAlgorithm.js"></script>
+<script type="text/javascript" src="https://az000za.github.io/CODEBASE/processorOptimization.js"></script>
+<script type="text/javascript" src="https://az000za.github.io/CODEBASE/updateFunctionByName.js"></script>
+<script type="text/javascript" src="https://az000za.github.io/CODEBASE/testFunctionIO.js"></script>
+<script type="text/javascript" src="https://az000za.github.io/CODEBASE/testFunctionIO.js"></script>
+<script type="text/javascript" filename="registry.html">
 class Codebase {
   constructor() {
     this.functions = [];
@@ -63,76 +68,9 @@ class Codebase {
   }
   searchFunctionByName(name) {return this.functions.find(func => func.functionName === name);}
   getAllFunctions() {return this.functions;}
-  updateFunctionByName(name, updatedInfo) {
-    const index = this.functions.findIndex(func => func.functionName === name);
-    if (index !== -1) {
-      this.functions[index] = { ...this.functions[index], ...updatedInfo };
-      console.log(`Function '${name}' updated.`);
-    } else {
-      console.log(`Function '${name}' not found.`);
-    }
-  }
-
-  testFunctionIO(name, input, expectedOutput) {
-    const func = this.searchFunctionByName(name);
-    if (func) {
-      const actualOutput = func.functionName.apply(null, input);
-      if (JSON.stringify(actualOutput) === JSON.stringify(expectedOutput)) {
-        return true;
-      }
-      return false;
-    }
-    return null;
-  }
 }
-
 // Example usage:
 const myCodebase = new Codebase();
-
-// Assume function definitions and information extraction in myCodebase
-
-function findPaths() {
-  const startType = document.getElementById('startType').value;
-  const endType = document.getElementById('endType').value;
-  document.getElementById('output').innerHTML = '';
-
-  // Find paths between user provided types
-  myCodebase.findPaths(startType, endType);
-}
-
-function searchFunction() {
-  const functionName = document.getElementById('searchFunction').value;
-  const foundFunction = myCodebase.searchFunctionByName(functionName);
-
-  if (foundFunction) {
-    document.getElementById('functionInfo').innerHTML = `
-      <h3>Function Found:</h3>
-      <pre>${JSON.stringify(foundFunction, null, 2)}</pre>
-    `;
-  } else {
-    document.getElementById('functionInfo').innerHTML = `
-      <p>Function not found!</p>
-    `;
-  }
-}
-
-function testFunctionIO() {
-  const functionName = document.getElementById('testFunction').value;
-  const testInput = JSON.parse(document.getElementById('testInput').value);
-  const expectedOutput = JSON.parse(document.getElementById('expectedOutput').value);
-
-  const testResult = myCodebase.testFunctionIO(functionName, testInput, expectedOutput);
-  
-  if (testResult === true) {
-    document.getElementById('testResult').innerHTML = `
-      <p>Test Passed!</p>
-    `;
-  } else {
-    document.getElementById('testResult').innerHTML = `
-      <p>Test Failed!</p>
-    `;
-  }
-}
 </script>
 
 </body>
