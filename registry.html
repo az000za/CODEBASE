@@ -37,52 +37,32 @@
 
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/acorn/dist/acorn.js"></script>
 <script type="text/javascript" src="https://az000za.github.io/CODEBASE/extractFunctionInfo.js"></script>
+<script type="text/javascript" src="https://az000za.github.io/CODEBASE/TypePathFinder.js"></script>
+<script type="text/javascript" src="https://az000za.github.io/CODEBASE/AlgoPathFinder.js"></script>
 <script>
 class Codebase {
   constructor() {
     this.functions = [];
   }
-
-  extractFunctionInfo(func, description = '', fileName = '') {
-    extractFunctionInfo(...arguments);
-  }
-
-  findPaths(startType, endType, visited = [], path = []) {
-    // Placeholder logic for finding paths between types using instructions
+  extractFunctionInfo(func, description = '', fileName = '') {extractFunctionInfo(...arguments);}
+  findPaths(start, end, visited = [], path = []) {
     visited.push(startType);
-    // Your logic for finding paths between types using instructions goes here
+    TypePathFinder(path, this.getFuncs(), inputType, goalType); 
+    AlgoPathFinder(path, this.getFuncs(), input, goal);
     document.getElementById('output').innerHTML += `Paths between ${startType} and ${endType} are found.<br>`;
     visited.pop();
   }
-
-  minifyCode() {
-    console.log('Minifying code...');
-    // Placeholder for code minification logic
-  }
-
-  replaceDataStructures() {
-    console.log('Replacing data structures...');
-    // Placeholder for data structure replacement logic
-  }
-
-  improveAlgorithms() {
-    console.log('Improving algorithms...');
-    // Placeholder for algorithmic improvement logic
-  }
-
+  minifyCode() {minifyCode(code);}
+  replaceDataStructures() {replaceDataStructures}
+  improveAlgorithms() {improveAlgorithms()}
+  processorOptimization(){processorOptimization()}
   optimizeCode() {
     this.minifyCode();
     this.replaceDataStructures();
     this.improveAlgorithms();
   }
-
-  searchFunctionByName(name) {
-    return this.functions.find(func => func.functionName === name);
-  }
-  getAllFunctions() {
-    return this.functions;
-  }
-
+  searchFunctionByName(name) {return this.functions.find(func => func.functionName === name);}
+  getAllFunctions() {return this.functions;}
   updateFunctionByName(name, updatedInfo) {
     const index = this.functions.findIndex(func => func.functionName === name);
     if (index !== -1) {
