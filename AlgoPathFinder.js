@@ -1,3 +1,27 @@
+console.log(`
+    The Algorithm Path Finder figures out 
+
+    what algorithms match the input and output.
+
+    Just like a traditional path path finder
+
+    consider 
+        the input to be the starting point
+        and the output to be the ending point.
+
+    All the inputs and outputs of an algorithm
+    are nodes the pathfinder traverses.
+
+    Here are the search space reduction techniques applied
+    - mapping data type to data type  
+            i.e. number => string ... number => boolean
+            i.e  whole  => int ... float => int
+    - constrainted range values in data type
+
+    - 
+`);
+
+
 const funcs_xor = [
     function XOR2(a) { return a ^ 2; },
     function XOR3(a) { return a ^ 3; },
