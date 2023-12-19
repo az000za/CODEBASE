@@ -49,11 +49,15 @@ const funcs = [
   let paths = []; // Set of successful paths made to goal
   let intersections = {};
   
-
   function TypePathFinder(paths, funcs, input, goal, variations){
+        let inputType = input.type;
+        let goalType = goal.type;
+        let outputType = func.name;
+
+        
+      
         if (func.name === goal) 
         if (func.params.includes(input.type))
-
   }
   
   function AlgoPathFinder(paths, funcs, input, goal, variations) {
