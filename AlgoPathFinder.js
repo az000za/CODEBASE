@@ -10,6 +10,10 @@ const funs_arith = [
 ];
 
 const funcs = [
+    /*
+        These are just a small set of functions available to the path finder
+        so it doesn't loop endlessly easily.
+    */
     function a() {},
     ...xor_funcs,
     ...funs_arith,
