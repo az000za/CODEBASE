@@ -36,7 +36,10 @@
 <script type="text/javascript" filename="registry.html">
 class Codebase {
   constructor() {
-    this.functions = [];
+    this.functions = [
+      ...JavaScriptOperatorsAsFunctions
+    ];
+    this.getAllFunctions();
   }
   extractFunctionInfo(func, description = '', fileName = '') {extractFunctionInfo(...arguments);}
   findPaths() {
