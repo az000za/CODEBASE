@@ -47,6 +47,7 @@ class Codebase {
   }
   searchFunctionByName(name) {return this.functions.find(func => func.functionName === name);}
   getAllFunctions() {
+    document.getElementById("functions").innerHTML = "";
     this.functions.forEach((funcObj)=>{
       document.getElementById("functions").innerHTML += `<div>funcName: ${funcObj.name} paramIn: ${funcObj.paramIn} paramOut: ${funcObj.paramsOut}</div>`;
     })
