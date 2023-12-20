@@ -7,6 +7,9 @@
 
 <h1>Codebase Management</h1>
 
+
+<button onclick="codebase.searchFunction()">Search Function by Name</button>
+  
 <button onclick="codebase.insertFunction()">Insert Function To Codebase</button>
 <textarea id="functionInfo"></textarea>
 
@@ -45,8 +48,15 @@ class Codebase {
     this.replaceDataStructures();
     this.improveAlgorithms();
   }
-  searchFunctionByName(name) {return this.functions.find(func => func.functionName === name);}
+  searchFunctionByName(name) {
+    let found = this.functions.find(func => func.name === name);
+    let preserved = this.functions;
+    this.functions = found;
+    this.getAllFunctions();
+    this.functions = preserved;
+  }
   getAllFunctions() {
+    document.getElementById("functions").innerHTML = "";
     this.functions.forEach((funcObj)=>{
       document.getElementById("functions").innerHTML += `<div>funcName: ${funcObj.name} paramIn: ${funcObj.paramIn} paramOut: ${funcObj.paramsOut}</div>`;
     })
