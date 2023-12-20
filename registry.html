@@ -39,12 +39,13 @@ class Codebase {
     this.functions = [];
   }
   extractFunctionInfo(func, description = '', fileName = '') {extractFunctionInfo(...arguments);}
-  findPaths(start, end, visited = [], path = []) {
-    visited.push(startType);
-    TypePathFinder(path, this.getFuncs(), inputType, goalType); 
-    AlgoPathFinder(path, this.getFuncs(), input, goal);
-    document.getElementById('output').innerHTML += `Paths between ${startType} and ${endType} are found.<br>`;
-    visited.pop();
+  findPaths() {
+    const input = document.getElementById("input").value;
+    const output = document.getElementById("output").value;
+    let path = [];
+    TypePathFinder(path, this.getAllFunctions(), inputType, goalType); 
+    AlgoPathFinder(path, this.getAllFunctions(), input, goal);
+    document.getElementById('paths').innerHTML += paths;
   }
   minifyCode() {minifyCode(code);}
   replaceDataStructures() {replaceDataStructures}
