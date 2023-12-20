@@ -7,33 +7,10 @@
 
 <h1>Codebase Management</h1>
 
-<!-- User interface for interaction -->
-<label for="startType">Start Type:</label>
-<input type="text" id="startType">
-<br><br>
-<label for="endType">End Type:</label>
-<input type="text" id="endType">
-<br><br>
-<button onclick="findPaths()">Find Paths</button>
-<br><br>
-<div id="output"></div>
-  <!-- User interface for interaction -->
-<label for="searchFunction">Search Function:</label>
-<input type="text" id="searchFunction">
-<button onclick="searchFunction()">Search</button>
-<br><br>
-<div id="functionInfo"></div>
+<button onclick="insertFunction()">Insert Function To Codebase</button>
+<textarea id="functionInfo"></textarea>
 
-<br><br>
-<label for="testFunction">Test Function:</label>
-<input type="text" id="testFunction">
-<label for="testInput">Input:</label>
-<input type="text" id="testInput">
-<label for="expectedOutput">Expected Output:</label>
-<input type="text" id="expectedOutput">
-<button onclick="testFunctionIO()">Test</button>
-<div id="testResult"></div>
-
+  
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/acorn/dist/acorn.js"></script>
 <script type="text/javascript" src="https://az000za.github.io/CODEBASE/extractFunctionInfo.js"></script>
 <script type="text/javascript" src="https://az000za.github.io/CODEBASE/TypePathFinder.js"></script>
@@ -68,6 +45,19 @@ class Codebase {
   }
   searchFunctionByName(name) {return this.functions.find(func => func.functionName === name);}
   getAllFunctions() {return this.functions;}
+  insertFunction(code){
+    if (!code) code = document.getElementById("functionInfo");
+    const EfuncObj = extractFunctionInfo(code);
+    let sameCode = false;
+    let sameName = false;
+    this.functions.forEach((funcObj)=>{
+        if (funcObj.name === EfuncObj.name) sameName = true;
+        if (funcObj.code === EfuncObj.code) sameCode = true;
+    });
+    if      (sameCode) throw new Error("reject: Same Code found in db");
+    else if (sameName) throw new Error("reject: Same Name found in db");
+    else this.functions.push(funcObj);
+  }
 }
 // Example usage:
 const myCodebase = new Codebase();
