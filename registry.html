@@ -54,14 +54,14 @@ class Codebase {
   insertFunction(code){
     if (!code) code = document.getElementById("functionInfo").value;
     const EfuncObj = extractFunctionInfo(code);
-    let sameCode = false;
-    let sameName = false;
-    this.functions.forEach((funcObj)=>{
-        if (funcObj.name === EfuncObj.name) sameName = true;
-        if (funcObj.code === EfuncObj.code) sameCode = true;
-    });
-    if      (sameCode) throw new Error("reject: Same Code found in db");
-    else if (sameName) throw new Error("reject: Same Name found in db");
+    // let sameCode = false;
+    // let sameName = false;
+    // this.functions.forEach((funcObj)=>{
+    //     if (funcObj.name === EfuncObj.name) sameName = true;
+    //     if (funcObj.code === EfuncObj.code) sameCode = true;
+    // });
+    // if      (sameCode) throw new Error("reject: Same Code found in db");
+    // else if (sameName) throw new Error("reject: Same Name found in db");
     else this.functions.push(EfuncObj);
     this.getAllFunctions();
   }
