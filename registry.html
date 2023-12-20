@@ -10,6 +10,8 @@
 <button onclick="codebase.insertFunction()">Insert Function To Codebase</button>
 <textarea id="functionInfo"></textarea>
 
+<div id="functions"></div>
+
   
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/acorn/dist/acorn.js"></script>
 <script type="text/javascript" src="https://az000za.github.io/CODEBASE/extractFunctionInfo.js"></script>
@@ -44,7 +46,11 @@ class Codebase {
     this.improveAlgorithms();
   }
   searchFunctionByName(name) {return this.functions.find(func => func.functionName === name);}
-  getAllFunctions() {return this.functions;}
+  getAllFunctions() {
+    this.functions.forEach((funcObj)=>{
+      document.getElementById("").innerHTML += `<div>funcName: ${funcObj.name} paramsIn: ${funcObj.paramsIn} paramsOut: ${funcObj.paramsOut}</div>`;
+    })
+  }
   insertFunction(code){
     if (!code) code = document.getElementById("functionInfo").value;
     const EfuncObj = extractFunctionInfo(code);
@@ -57,6 +63,7 @@ class Codebase {
     if      (sameCode) throw new Error("reject: Same Code found in db");
     else if (sameName) throw new Error("reject: Same Name found in db");
     else this.functions.push(EfuncObj);
+    this.getAllFunctions();
   }
 }
 // Example usage:
