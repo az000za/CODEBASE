@@ -7,141 +7,60 @@
 
 <h1>Codebase Management</h1>
 
-<!-- User interface for interaction -->
-<label for="startType">Start Type:</label>
-<input type="text" id="startType">
-<br><br>
-<label for="endType">End Type:</label>
-<input type="text" id="endType">
-<br><br>
-<button onclick="findPaths()">Find Paths</button>
-<br><br>
-<div id="output"></div>
+<button onclick="codebase.insertFunction()">Insert Function To Codebase</button>
+<textarea id="functionInfo"></textarea>
 
-<script src="https://cdn.jsdelivr.net/npm/acorn/dist/acorn.js"></script>
-<script>
+  
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/acorn/dist/acorn.js"></script>
+<script type="text/javascript" src="https://az000za.github.io/CODEBASE/extractFunctionInfo.js"></script>
+<script type="text/javascript" src="https://az000za.github.io/CODEBASE/TypePathFinder.js"></script>
+<script type="text/javascript" src="https://az000za.github.io/CODEBASE/AlgoPathFinder.js"></script>
+<script type="text/javascript" src="https://az000za.github.io/CODEBASE/findPathsForIOs.js"></script>
+<script type="text/javascript" src="https://az000za.github.io/CODEBASE/operators.js"></script>
+
+<script type="text/javascript" src="https://az000za.github.io/CODEBASE/minifyCode.js"></script>
+<script type="text/javascript" src="https://az000za.github.io/CODEBASE/improveAlgorithm.js"></script>
+<script type="text/javascript" src="https://az000za.github.io/CODEBASE/processorOptimization.js"></script>
+<script type="text/javascript" filename="registry.html">
 class Codebase {
   constructor() {
     this.functions = [];
   }
-
-  extractFunctionInfo(func, description = '', fileName = '') {
-    const functionString = func.toString();
-    const functionName = func.name || 'anonymous';
-    const functionParams = functionString.match(/\(([^)]*)\)/)[1].split(',').map(param => param.trim());
-    const functionBody = functionString.match(/\{([^]*)\}/)[1].trim();
-
-    const parsedAST = acorn.parse(functionBody, { ecmaVersion: 'latest' });
-
-    const instructions = [];
-    acorn.walk.simple(parsedAST, {
-      FunctionDeclaration(node) {
-        const innerFunctionInfo = {
-          functionName: node.id.name,
-          paramIn: node.params.map(param => param.name),
-          instructions: [], // Placeholder for inner functions
-          paramOut: [], // Placeholder for output params of inner functions
-          fileName: fileName // Placeholder for file name
-        };
-        instructions.push(innerFunctionInfo);
-      }
-    });
-
-    const functionInfo = {
-      functionName: functionName,
-      description: description,
-      paramIn: functionParams,
-      instructions: instructions.map(instruction => this.extractInnerFunction(instruction)),
-      paramOut: [], // Placeholder for output params of outer function
-      fileName: fileName // Placeholder for file name
-    };
-
-    const existingFuncIndex = this.functions.findIndex(func => func.functionName === functionName);
-    if (existingFuncIndex !== -1) {
-      this.functions[existingFuncIndex] = { ...this.functions[existingFuncIndex], ...functionInfo };
-    } else {
-      this.functions.push(functionInfo);
-    }
-  }
-
-  extractInnerFunction(instruction) {
-    const func = new Function(`return ${instruction.functionName}`)();
-    return this.extractFunctionInfo(func);
-  }
-
-  findPaths(startType, endType, visited = [], path = []) {
-    // Placeholder logic for finding paths between types using instructions
+  extractFunctionInfo(func, description = '', fileName = '') {extractFunctionInfo(...arguments);}
+  findPaths(start, end, visited = [], path = []) {
     visited.push(startType);
-    // Your logic for finding paths between types using instructions goes here
+    TypePathFinder(path, this.getFuncs(), inputType, goalType); 
+    AlgoPathFinder(path, this.getFuncs(), input, goal);
     document.getElementById('output').innerHTML += `Paths between ${startType} and ${endType} are found.<br>`;
     visited.pop();
   }
-
-  minifyCode() {
-    console.log('Minifying code...');
-    // Placeholder for code minification logic
-  }
-
-  replaceDataStructures() {
-    console.log('Replacing data structures...');
-    // Placeholder for data structure replacement logic
-  }
-
-  improveAlgorithms() {
-    console.log('Improving algorithms...');
-    // Placeholder for algorithmic improvement logic
-  }
-
+  minifyCode() {minifyCode(code);}
+  replaceDataStructures() {replaceDataStructures}
+  improveAlgorithms() {improveAlgorithms()}
+  processorOptimization(){processorOptimization()}
   optimizeCode() {
     this.minifyCode();
     this.replaceDataStructures();
     this.improveAlgorithms();
   }
-
-  searchFunctionByName(name) {
-    return this.functions.find(func => func.functionName === name);
-  }
-
-  getAllFunctions() {
-    return this.functions;
-  }
-
-  updateFunctionByName(name, updatedInfo) {
-    const index = this.functions.findIndex(func => func.functionName === name);
-    if (index !== -1) {
-      this.functions[index] = { ...this.functions[index], ...updatedInfo };
-      console.log(`Function '${name}' updated.`);
-    } else {
-      console.log(`Function '${name}' not found.`);
-    }
-  }
-
-  testFunctionIO(name, input, expectedOutput) {
-    const func = this.searchFunctionByName(name);
-    if (func) {
-      const actualOutput = func.functionName.apply(null, input);
-      if (JSON.stringify(actualOutput) === JSON.stringify(expectedOutput)) {
-        return true;
-      }
-      return false;
-    }
-    return null;
+  searchFunctionByName(name) {return this.functions.find(func => func.functionName === name);}
+  getAllFunctions() {return this.functions;}
+  insertFunction(code){
+    if (!code) code = document.getElementById("functionInfo").value;
+    const EfuncObj = extractFunctionInfo(code);
+    let sameCode = false;
+    let sameName = false;
+    this.functions.forEach((funcObj)=>{
+        if (funcObj.name === EfuncObj.name) sameName = true;
+        if (funcObj.code === EfuncObj.code) sameCode = true;
+    });
+    if      (sameCode) throw new Error("reject: Same Code found in db");
+    else if (sameName) throw new Error("reject: Same Name found in db");
+    else this.functions.push(EfuncObj);
   }
 }
-
 // Example usage:
-const myCodebase = new Codebase();
-
-// Assume function definitions and information extraction in myCodebase
-
-function findPaths() {
-  const startType = document.getElementById('startType').value;
-  const endType = document.getElementById('endType').value;
-  document.getElementById('output').innerHTML = '';
-
-  // Find paths between user provided types
-  myCodebase.findPaths(startType, endType);
-}
+const codebase = new Codebase();
 </script>
 
 </body>
