@@ -31,9 +31,3 @@ function MapFunctionIOs(funcs, minNum, maxNum) {
 
   return results;
 }
-
-// Example usage:
-const minNumber = 1;
-const maxNumber = 5;
-const resultMap = MapFunctionIOs(minNumber, maxNumber);
-console.log(resultMap);
