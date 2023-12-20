@@ -9,6 +9,8 @@
 
 
 <button onclick="codebase.searchFunction()">Search Function by Name</button>
+<input id="functionName" type="text" placeholder="What is the function name to search?">
+
   
 <button onclick="codebase.insertFunction()">Insert Function To Codebase</button>
 <textarea id="functionInfo"></textarea>
@@ -49,6 +51,7 @@ class Codebase {
     this.improveAlgorithms();
   }
   searchFunctionByName(name) {
+    if (!name) name = document.getElementById("functionName").value;
     let found = this.functions.find(func => func.name === name);
     let preserved = this.functions;
     this.functions = found;
