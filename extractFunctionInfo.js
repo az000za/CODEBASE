@@ -1,6 +1,7 @@
 function extractFunctionInfo(func, description = '', fileName = '') {
-  const functionName = func.name;
   const functionString = func.toString();
+  const end = functionString.indexOf("(");  
+  const functionName = functionString.slice(0, end).split(" ").pop();
   const functionParams = functionString.slice(
     functionString.indexOf('(') + 1,
     functionString.indexOf(')')
