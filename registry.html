@@ -46,9 +46,16 @@ class Codebase {
   searchFunctionByName(name) {return this.functions.find(func => func.functionName === name);}
   getAllFunctions() {return this.functions;}
   insertFunction(code){
-    const funcObj = extractFunctionInfo(code);
-    if      (sameCode) reject();
-    else if (sameName) reject();
+    if (!code) code = document.getElementById("functionInfo");
+    const EfuncObj = extractFunctionInfo(code);
+    let sameCode = false;
+    let sameName = false;
+    this.functions.forEach((funcObj)=>{
+        if (funcObj.name === EfuncObj.name) sameName = true;
+        if (funcObj.code === EfuncObj.code) sameCode = true;
+    });
+    if      (sameCode) throw new Error("reject: Same Code found in db");
+    else if (sameName) throw new Error("reject: Same Name found in db");
     else this.functions.push(funcObj);
   }
 }
