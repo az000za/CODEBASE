@@ -1,4 +1,3 @@
-script type="text/javascript" filename="registry.html">
 class Codebase {
   constructor() {
     this.functions = [
@@ -57,5 +56,3 @@ class Codebase {
     this.getAllFunctions();
   }
 }
-// Example usage:
-const codebase = new Codebase();
