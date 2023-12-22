@@ -1,55 +1,55 @@
   const JavaScriptNumericFunctions = [
     // Basic Arithmetic
-    { func: (a, b) => a + b, name: 'Addition' },
-    { func: (a, b) => a - b, name: 'Subtraction' },
-    { func: (a, b) => a * b, name: 'Multiplication' },
-    { func: (a, b) => a / b, name: 'Division' },
-    { func: (a, b) => a % b, name: 'Modulo' },
+    { func: function(a, b) => a + b, name: 'Addition' },
+    { func: function(a, b) => a - b, name: 'Subtraction' },
+    { func: function(a, b) => a * b, name: 'Multiplication' },
+    { func: function(a, b) => a / b, name: 'Division' },
+    { func: function(a, b) => a % b, name: 'Modulo' },
   
     // Exponential and Logarithmic
-    { func: (base, exponent) => base ** exponent, name: 'Exponentiation' },
-    { func: a => Math.pow(a, 2), name: 'Square' },
-    { func: a => Math.pow(a, 3), name: 'Cube' },
-    { func: a => Math.sqrt(a), name: 'Square Root' },
-    { func: a => Math.cbrt(a), name: 'Cube Root' },
-    { func: a => Math.log10(a), name: 'Logarithm (base 10)' },
-    { func: a => Math.log(a), name: 'Natural Logarithm' },
-    { func: a => Math.exp(a), name: 'Exponential Function' },
+    { func: function(base, exponent) => base ** exponent, name: 'Exponentiation' },
+    { func: function(a){Math.pow(a, 2), name: 'Square' },
+    { func: function(a => Math.pow(a, 3), name: 'Cube' },
+    { func: function(a => Math.sqrt(a), name: 'Square Root' },
+    { func: function(a => Math.cbrt(a), name: 'Cube Root' },
+    { func: function(a => Math.log10(a), name: 'Logarithm (base 10)' },
+    { func: function(a => Math.log(a), name: 'Natural Logarithm' },
+    { func: function(a => Math.exp(a), name: 'Exponential Function' },
   
     // Trigonometric Functions
-    { func: a => Math.sin(a), name: 'Sine' },
-    { func: a => Math.cos(a), name: 'Cosine' },
-    { func: a => Math.tan(a), name: 'Tangent' },
-    { func: a => Math.asin(a), name: 'Arcsine' },
-    { func: a => Math.acos(a), name: 'Arccosine' },
-    { func: a => Math.atan(a), name: 'Arctangent' },
+    { func: function(a => Math.sin(a), name: 'Sine' },
+    { func: function(a => Math.cos(a), name: 'Cosine' },
+    { func: function(a => Math.tan(a), name: 'Tangent' },
+    { func: function(a => Math.asin(a), name: 'Arcsine' },
+    { func: function(a => Math.acos(a), name: 'Arccosine' },
+    { func: function(a => Math.atan(a), name: 'Arctangent' },
   
     // Rounding and Absolute Value
-    { func: a => Math.abs(a), name: 'Absolute Value' },
-    { func: a => Math.ceil(a), name: 'Ceiling' },
-    { func: a => Math.floor(a), name: 'Floor' },
-    { func: a => Math.round(a), name: 'Round' },
-    { func: a => Math.trunc(a), name: 'Truncate (Remove Decimal)' },
+    { func: function(a => Math.abs(a), name: 'Absolute Value' },
+    { func: function(a => Math.ceil(a), name: 'Ceiling' },
+    { func: function(a => Math.floor(a), name: 'Floor' },
+    { func: function(a => Math.round(a), name: 'Round' },
+    { func: function(a => Math.trunc(a), name: 'Truncate (Remove Decimal)' },
   
     // Minimum and Maximum
-    { func: (a, b) => Math.max(a, b), name: 'Maximum' },
-    { func: (a, b) => Math.min(a, b), name: 'Minimum' },
+    { func: function(a, b) => Math.max(a, b), name: 'Maximum' },
+    { func: function(a, b) => Math.min(a, b), name: 'Minimum' },
   
     // Random Number
-    { func: () => Math.random(), name: 'Random Number (0 to 1)' },
+    { func: function() => Math.random(), name: 'Random Number (0 to 1)' },
   ];
   const JavaScriptComparisonFunctions = [
     // Equality Checks
     { 
-      func: (a, b) => a == b, 
+      func: function(a, b) => a == b, 
       name: 'looseEquality',
     },
     { 
-      func: (a, b) => a === b, 
+      func: function(a, b) => a === b, 
       name: 'strictEquality',
     },
     { 
-      func: (a, b) => a != b, 
+      func: function(a, b) => a != b, 
       name: 'looseInequality',
     },
     { 
