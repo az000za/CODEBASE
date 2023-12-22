@@ -1,20 +1,20 @@
   const JavaScriptNumericFunctions = [
     // Basic Arithmetic
-    { func: function(a, b) {a + b}, name: 'Addition' },
-    { func: function(a, b) {a - b}, name: 'Subtraction' },
-    { func: function(a, b) {a * b}, name: 'Multiplication' },
-    { func: function(a, b) {a / b}, name: 'Division' },
-    { func: function(a, b) {a % b}, name: 'Modulo' },
+    { func: function(a, b) {return a + b}, name: 'Addition' },
+    { func: function(a, b) {return a - b}, name: 'Subtraction' },
+    { func: function(a, b) {return a * b}, name: 'Multiplication' },
+    { func: function(a, b) {return a / b}, name: 'Division' },
+    { func: function(a, b) {return a % b}, name: 'Modulo' },
   
     // Exponential and Logarithmic
-    { func: function(base, exponent) {base ** exponent}, name: 'Exponentiation' },
-    { func: function(a){Math.pow(a, 2)}, name: 'Square' },
-    { func: function(a) {Math.pow(a, 3)}, name: 'Cube' },
-    { func: function(a) { Math.sqrt(a)}, name: 'Square Root' },
-    { func: function(a) {Math.cbrt(a)}, name: 'Cube Root' },
-    { func: function(a) {Math.log10(a)}, name: 'Logarithm (base 10)' },
-    { func: function(a) {Math.log(a)}, name: 'Natural Logarithm' },
-    { func: function(a) {Math.exp(a)}, name: 'Exponential Function' },
+    { func: function(base, exponent) {return base ** exponent}, name: 'Exponentiation' },
+    { func: function(a){return Math.pow(a, 2)}, name: 'Square' },
+    { func: function(a) {return Math.pow(a, 3)}, name: 'Cube' },
+    { func: function(a) {return Math.sqrt(a)}, name: 'Square Root' },
+    { func: function(a) {return Math.cbrt(a)}, name: 'Cube Root' },
+    { func: function(a) {return Math.log10(a)}, name: 'Logarithm (base 10)' },
+    { func: function(a) {return Math.log(a)}, name: 'Natural Logarithm' },
+    { func: function(a) {return Math.exp(a)}, name: 'Exponential Function' },
   
     // Trigonometric Functions
     { func: function(a) {Math.sin(a)}, name: 'Sine' },
