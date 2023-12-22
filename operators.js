@@ -53,111 +53,111 @@
       name: 'looseInequality',
     },
     { 
-      func: (a, b) => a !== b, 
+      func: function(a, b) => a !== b, 
       name: 'strictInequality',
     },
   
     // Relational Operators
     { 
-      func: (a, b) => a > b, 
+      func: function(a, b) => a > b, 
       name: 'greaterThan',
     },
     { 
-      func: (a, b) => a < b, 
+      func: function(a, b) => a < b, 
       name: 'lessThan',
     },
     { 
-      func: (a, b) => a >= b, 
+      func: function(a, b) => a >= b, 
       name: 'greaterThanOrEqual',
     },
     { 
-      func: (a, b) => a <= b, 
+      func: function(a, b) => a <= b, 
       name: 'lessThanOrEqual',
     },
   
     // Other Comparison Functions
     { 
-      func: (a, b) => Object.is(a, b), 
+      func: function(a, b) => Object.is(a, b), 
       name: 'objectIs_SameValueZero',
     },
     { 
-      func: (a, b) => Object.is(a, -0) && Object.is(b, 0) || Object.is(a, 0) && Object.is(b, -0), 
+      func: function(a, b) => Object.is(a, -0) && Object.is(b, 0) || Object.is(a, 0) && Object.is(b, -0), 
       name: 'objectIs_SameValue',
     },
     { 
-      func: (a, b) => isNaN(a) && isNaN(b), 
+      func: function(a, b) => isNaN(a) && isNaN(b), 
       name: 'isNaN_CheckForNaN',
     },
     { 
-      func: (a, b) => Object.prototype.toString.call(a) === Object.prototype.toString.call(b), 
+      func: function(a, b) => Object.prototype.toString.call(a) === Object.prototype.toString.call(b), 
       name: 'typeEquality',
     },
   ];
   const JavaScriptLogicalFunctions = [
     // Logical AND
     {
-      func: (a, b) => a && b,
+      func: function(a, b) => a && b,
       name: 'logicalAND',
     },
   
     // Logical OR
     {
-      func: (a, b) => a || b,
+      func: function(a, b) => a || b,
       name: 'logicalOR',
     },
   
     // Logical NOT
     {
-      func: a => !a,
+      func: function(a => !a,
       name: 'logicalNOT',
     },
   
     // XOR (Exclusive OR) - Custom implementation
     {
-      func: (a, b) => (a && !b) || (!a && b),
+      func: function(a, b) => (a && !b) || (!a && b),
       name: 'logicalXOR',
     }
   ];
   const JavaScriptBitwiseFunctions = [
   // Bitwise AND
   {
-    func: (a, b) => a & b,
+    func: function(a, b) => a & b,
     name: 'bitwiseAND',
   },
 
   // Bitwise OR
   {
-    func: (a, b) => a | b,
+    func: function(a, b) => a | b,
     name: 'bitwiseOR',
   },
 
   // Bitwise XOR
   {
-    func: (a, b) => a ^ b,
+    func: function(a, b) => a ^ b,
     name: 'bitwiseXOR',
   },
 
   // Bitwise NOT
   {
-    func: a => ~a,
+    func: function(a => ~a,
     name: 'bitwiseNOT',
   },
 
   // Left Shift
   {
-    func: (a, b) => a << b,
+    func: function(a, b) => a << b,
     name: 'leftShift',
   },
 
   // Signed Right Shift
   {
-    func: (a, b) => a >> b,
+    func: function(a, b) => a >> b,
     name: 'signedRightShift',
   },
 
   // Unsigned Right Shift
   {
-    func: (a, b) => a >>> b,
+    func: function(a, b) => a >>> b,
     name: 'unsignedRightShift',
   }
 ];
