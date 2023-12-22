@@ -1,3 +1,3 @@
-function SubTypePathFinder(in, out){
+function SubTypePathFinder(inputType, outputType){
   console.log("unprogrammed: SubTypePathFinder");
 }
