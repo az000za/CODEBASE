@@ -51,9 +51,10 @@ class Codebase {
     const inputType = typeof input;
     const goalType = typeof output;
     let path = [];
-    TypePathFinder(path, this.getAllFunctions(), inputType, goalType); 
-    AlgoPathFinder(path, this.getAllFunctions(), input, goal);
-    document.getElementById('paths').innerHTML += paths;
+    const typedPaths = TypePathFinder(path, this.getAllFunctions(), inputType, goalType);
+    const subTypedPaths = SubTypePathFinder(path, typedPaths, inputConstraint, goalConstraint);
+    const algoPaths = AlgoPathFinder(path, subTypedPaths, input, goal);
+    document.getElementById('paths').innerHTML += algoPaths;
   }
   minifyCode() {minifyCode(code);}
   replaceDataStructures() {replaceDataStructures}
