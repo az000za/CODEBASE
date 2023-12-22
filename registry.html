@@ -48,6 +48,8 @@ class Codebase {
   findPaths() {
     const input = document.getElementById("input").value;
     const output = document.getElementById("output").value;
+    const inputType = typeof input;
+    const goalType = typeof output;
     let path = [];
     TypePathFinder(path, this.getAllFunctions(), inputType, goalType); 
     AlgoPathFinder(path, this.getAllFunctions(), input, goal);
