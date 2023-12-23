@@ -1,4 +1,4 @@
-function minify(code) {
+function minifyCode(code) {
   // Remove comments
   code = code.replace(/\/\*[\s\S]*?\*\/|\/\/.*/g, '');
   // Remove whitespaces and newlines
