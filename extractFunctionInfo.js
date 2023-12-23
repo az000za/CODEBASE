@@ -1,6 +1,7 @@
 function extractFunctionInfo(func, description = '', fileName = '') {
   const functionString = func.toString();
-  const functionName = func.name || 'anonymous';
+  const end = functionString.indexOf("(");  
+  const functionName = functionString.slice(0, end).split(" ").pop();
   const functionParams = functionString.slice(
     functionString.indexOf('(') + 1,
     functionString.indexOf(')')
@@ -16,7 +17,7 @@ function extractFunctionInfo(func, description = '', fileName = '') {
     innerFunctions.forEach(innerFunc => {
       const innerFunctionName = innerFunc.replace('function', '').trim();
       const innerFunctionInfo = {
-        functionName: innerFunctionName,
+        name: innerFunctionName,
         paramIn: [], // Placeholder for inner function's input parameters
         instructions: [], // Placeholder for inner functions
         paramOut: [], // Placeholder for output params of inner functions
@@ -27,12 +28,12 @@ function extractFunctionInfo(func, description = '', fileName = '') {
   }
 
   function extractInnerFunction(instruction) {
-    const func = new Function(`return ${instruction.functionName}`)();
+    const func = new Function(`return ${instruction.name}`)();
     return this.extractFunctionInfo(func);
   }
 
   const functionInfo = {
-    functionName: functionName,
+    name: functionName,
     description: description,
     paramIn: functionParams,
     instructions: instructions.map(instruction => extractInnerFunction(instruction)),

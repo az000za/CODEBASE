@@ -1,67 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Codebase Management</title>
+  <title>CODEBASE</title>
 </head>
-<body>
-
-<h1>Codebase Management</h1>
-
-<button onclick="codebase.insertFunction()">Insert Function To Codebase</button>
-<textarea id="functionInfo"></textarea>
-
-  
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/acorn/dist/acorn.js"></script>
-<script type="text/javascript" src="https://az000za.github.io/CODEBASE/extractFunctionInfo.js"></script>
-<script type="text/javascript" src="https://az000za.github.io/CODEBASE/TypePathFinder.js"></script>
-<script type="text/javascript" src="https://az000za.github.io/CODEBASE/AlgoPathFinder.js"></script>
-<script type="text/javascript" src="https://az000za.github.io/CODEBASE/findPathsForIOs.js"></script>
-<script type="text/javascript" src="https://az000za.github.io/CODEBASE/operators.js"></script>
-
-<script type="text/javascript" src="https://az000za.github.io/CODEBASE/minifyCode.js"></script>
-<script type="text/javascript" src="https://az000za.github.io/CODEBASE/improveAlgorithm.js"></script>
-<script type="text/javascript" src="https://az000za.github.io/CODEBASE/processorOptimization.js"></script>
-<script type="text/javascript" filename="registry.html">
-class Codebase {
-  constructor() {
-    this.functions = [];
-  }
-  extractFunctionInfo(func, description = '', fileName = '') {extractFunctionInfo(...arguments);}
-  findPaths(start, end, visited = [], path = []) {
-    visited.push(startType);
-    TypePathFinder(path, this.getFuncs(), inputType, goalType); 
-    AlgoPathFinder(path, this.getFuncs(), input, goal);
-    document.getElementById('output').innerHTML += `Paths between ${startType} and ${endType} are found.<br>`;
-    visited.pop();
-  }
-  minifyCode() {minifyCode(code);}
-  replaceDataStructures() {replaceDataStructures}
-  improveAlgorithms() {improveAlgorithms()}
-  processorOptimization(){processorOptimization()}
-  optimizeCode() {
-    this.minifyCode();
-    this.replaceDataStructures();
-    this.improveAlgorithms();
-  }
-  searchFunctionByName(name) {return this.functions.find(func => func.functionName === name);}
-  getAllFunctions() {return this.functions;}
-  insertFunction(code){
-    if (!code) code = document.getElementById("functionInfo").value;
-    const EfuncObj = extractFunctionInfo(code);
-    let sameCode = false;
-    let sameName = false;
-    this.functions.forEach((funcObj)=>{
-        if (funcObj.name === EfuncObj.name) sameName = true;
-        if (funcObj.code === EfuncObj.code) sameCode = true;
-    });
-    if      (sameCode) throw new Error("reject: Same Code found in db");
-    else if (sameName) throw new Error("reject: Same Name found in db");
-    else this.functions.push(EfuncObj);
-  }
-}
-// Example usage:
-const codebase = new Codebase();
-</script>
-
+<body id="root">
+  <h1>CODEBASE</h1>
+  <button onclick="codebase.searchFunctionByName()">Search Function by Name</button>
+  <input id="functionName" type="text" placeholder="What is the function name to search?">
+  <button onclick="codebase.insertFunction()">Insert Function To Codebase</button>
+  <textarea id="functionInfo"></textarea>
+  <button onclick="codebase.findPaths()">Find Paths</button>
+  <input id="input" type="text" placeholder="input">
+  <input id="output" type="text" placeholder="output">
+  <div id="functions"></div>
+  <div id="paths"></div>
 </body>
+  <script type="text/javascript" src="https://az000za.github.io/CODEBASE/operators.js"></script>
+  <script type="text/javascript" src="https://az000za.github.io/CODEBASE/extractFunctionInfo.js"></script>
+  <script type="text/javascript" src="https://az000za.github.io/CODEBASE/MapFuncIOs.js"></script>
+  <script type="text/javascript" src="https://az000za.github.io/CODEBASE/TypePathFinder.js"></script>
+  <script type="text/javascript" src="https://az000za.github.io/CODEBASE/SubTypePathFinder.js"></script>
+  <script type="text/javascript" src="https://az000za.github.io/CODEBASE/AlgoPathFinder.js"></script>
+  <script type="text/javascript" src="https://az000za.github.io/CODEBASE/findPathsForIOs.js"></script>
+  <script type="text/javascript" src="https://az000za.github.io/CODEBASE/OptimizeAlgoPath.js"></script>
+  <script type="text/javascript" src="https://az000za.github.io/CODEBASE/minifyCode.js"></script>
+  <script type="text/javascript" src="https://az000za.github.io/CODEBASE/improveAlgorithm.js"></script>
+  <script type="text/javascript" src="https://az000za.github.io/CODEBASE/processorOptimization.js"></script>
+  <script type="text/javascript" src="https://az000za.github.io/CODEBASE/codebase.js"></script>
 </html>
